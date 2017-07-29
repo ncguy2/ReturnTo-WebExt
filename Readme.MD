@@ -1,6 +1,6 @@
 # ReturnTo
 
-## Source installation
+## Temporary source installation
 
 * [Download the source package here](https://github.com/ncguy2/ReturnTo-WebExt/archive/master.zip)
 * Extract it
