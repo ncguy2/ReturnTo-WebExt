@@ -1,0 +1,24 @@
+{
+	"manifest_version": 2,
+	"name": "ReturnTo",
+	"version": "0.1",
+	"default_locale": "en",
+	"description": "Stores a page element for later",
+	"icons": {
+		"48": "icons/ReturnTo_tmp.png"
+	},
+
+	"sidebar_action": {
+		"default_icon": "icons/ReturnTo_tmp.png",
+		"default_title" : "Return to",
+		"default_panel": "sidebar/panel.html"
+	},
+
+
+	"background": {
+		"scripts": ["shared/Global.js", "background.js"]
+	},
+
+	"permissions": ["storage", "contextMenus"]
+
+}

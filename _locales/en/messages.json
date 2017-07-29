@@ -1,0 +1,6 @@
+{
+	"contextMenuItemSelectionStore": {
+		"message": "Store selection",
+		"description": "Stores the current selection for later"
+	}
+}
