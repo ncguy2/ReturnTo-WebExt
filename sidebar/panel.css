@@ -34,9 +34,17 @@ div[data-key]:hover {
     text-align: right;
 }
 
+.closeBtn {
+    padding: 0 !important;
+    width: 24px;
+    height: 24px;
+    float:right;
+}
+
 .truncateParent {
     position:relative;
     max-height: 3.6em;
+    width: calc(96% - 36px);
 }
 
 .truncate {
@@ -53,4 +61,28 @@ div[data-key]:hover {
     height: 100%;
     /*background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);*/
     background: linear-gradient(transparent 2.4em, white);
+}
+
+.anchor {
+    color: Highlight;
+    cursor: pointer;
+
+}
+.anchor:hover {
+    text-decoration: underline;
+}
+
+.clearfix {
+    clear:both;
+}
+
+.entryContainer {
+    padding: 2px 2px 2px 8px;
+}
+
+.internal_stringWidth {
+    position: absolute;
+    float: left;
+    white-space: nowrap;
+    visibility: hidden;
 }

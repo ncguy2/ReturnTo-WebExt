@@ -75,3 +75,23 @@ ReturnTo.DOM = {
             element.setAttribute("data-inverted", inverted);
     }
 };
+
+
+if(!String.prototype.width) {
+    String.prototype.width = function() {
+        var body = document.querySelector("#panelBody");
+        var o = ReturnTo.DOM.CreateElement("div", {className:"internal_stringWidth", innerHTML:this}, {}, body);
+        // o.style.position = "absolute";
+        // o.style.float = "left";
+        // o.style.whiteSpace = "nowrap"
+            // o = $('<div>' + this + '</div>')
+            //     .css({'position': 'absolute', 'float': 'left', 'white-space': 'nowrap', 'visibility': 'hidden', 'font': f})
+            //     .appendTo($('body')),
+        var rect = o.getBoundingClientRect();
+        var w = rect.width;
+
+        o.remove();
+
+        return w;
+    }
+}

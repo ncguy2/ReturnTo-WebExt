@@ -18,8 +18,6 @@ browser.storage.onChanged.addListener((changes, areaName) => {
 function BuildElement(key, data) {
     var ce = ReturnTo.DOM.CreateElement;
     var container = ce("div", {className:"entryContainer"}, {"data-key": key});
-    container.style.padding = "2px";
-    container.style.paddingLeft = "8px";
 
     var closeBtn = ce("button", {className:"ui button closeBtn"}, {}, container);
     ce("img", {src:"../icons/ReturnTo_closeBlack.svg",alt:"Close"}, {}, closeBtn);
@@ -66,8 +64,24 @@ function BuildElement(key, data) {
 
     var p = ce("div", {className:"truncateParent"}, {}, container);
     ce("p", {className:"truncate", innerHTML:data.targetText}, {}, p);
-    ce("a", {className:"returnTo anchor",innerHTML:data.targetUrl}, {href:data.targetUrl}, container);
+    ce("div", {className:"clearfix"}, {}, container);
+    var anchor = ce("div", {className:"returnTo anchor"}, {}, container);
+    var anchorText = ce("span", {innerHTML:data.targetUrl}, {href:data.targetUrl}, anchor);
     ce("section", {}, {}, container).style.width = "100%";
+
+    anchorText.addEventListener("click", e => {
+        var href = e.originalTarget.innerHTML;
+        if(!href) {
+            console.log("No href found");
+            e.originalTarget.style.color = "red";
+            return;
+        }
+
+        browser.tabs.create({
+            active:e.ctrlKey,
+            url:href
+        });
+    });
 
     return container;
 }

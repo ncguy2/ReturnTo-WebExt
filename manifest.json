@@ -19,6 +19,6 @@
 		"scripts": ["shared/Global.js", "background.js"]
 	},
 
-	"permissions": ["storage", "contextMenus"]
+	"permissions": ["storage", "contextMenus", "tabs"]
 
 }
