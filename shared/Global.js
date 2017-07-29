@@ -45,9 +45,17 @@ ReturnTo.Storage = {
 
 };
 
-ReturnTo.Messaging = {
+ReturnTo.Constants = {
     Keys: {
         RefreshPanel: "ReturnTo.RefreshPanel"
+    },
+    StorageTypes: {
+        Page: "page",
+        Selection: "selection",
+        Image: "image",
+
+        Audio: "audio",
+        Video: "video"
     }
 };
 
@@ -67,6 +75,11 @@ ReturnTo.DOM = {
         return e;
     },
 
+    OpenTab: function(url, options) {
+        options['url'] = url;
+        browser.tabs.create(options);
+    },
+
     AddTooltip: function(element, text, position, inverted) {
         element.setAttribute("data-tooltip", text);
         if(position)
@@ -76,6 +89,40 @@ ReturnTo.DOM = {
     }
 };
 
+ReturnTo.Settings = {
+    Registry: {
+        Image_ConstraintWidth: {
+            name: "Restrict by width",
+            description: "Whether images should be constrained by width for sizing",
+            field: "checkbox",
+            defaultValue: false
+        }
+    },
+    GetIdealRegistry: () => {
+        var reg = {};
+        for(var i in ReturnTo.Settings.Registry) {
+            var d = ReturnTo.Settings.Registry[i];
+            d.id = i;
+            reg[i] = d;
+        }
+        return reg;
+    },
+    GetStorage: () => {
+        return browser.storage.local;
+    },
+    Get: (id, callback) => {
+        ReturnTo.Settings.GetStorage().get(id).then(value => {
+            callback(value);
+        }, reason => {
+            console.log(reason);
+            if(!ReturnTo.Settings.Registry[id]) return;
+            callback(ReturnTo.Settings.Registry[id].defaultValue, reason);
+        });
+    },
+    Set: (id, value) => {
+        return ReturnTo.Settings.GetStorage().set(id, value);
+    }
+};
 
 if(!String.prototype.width) {
     String.prototype.width = function() {

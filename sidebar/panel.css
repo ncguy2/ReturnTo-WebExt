@@ -27,7 +27,7 @@ div[data-key]:hover {
     box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.75);
 }
 
-.returnTo.anchor, a {
+.returnTo.anchor, .returnTo.timestamp {
     font-size: small;
     display: inline-block;
     overflow: hidden;
@@ -54,7 +54,7 @@ div[data-key]:hover {
 .truncate {
     line-height: 1.2em;
     max-height: 3.6em;
-    overflow:hidden
+    overflow:hidden;
 }
 .truncate:after, .truncate::after {
     content: "";
@@ -93,4 +93,43 @@ div[data-key]:hover {
 
 p {
     min-width: 0 !important;
+}
+
+.invalidEntry {
+    background: hsla(0, 100%, 75%, 0.4);
+}
+
+.clickable {
+    cursor: pointer;
+    transition: box-shadow .4s, -webkit-box-shadow .4s, -moz-box-shadow .4s;
+}
+
+.clickable.black:hover {
+    -webkit-box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.75);
+}
+
+.clickable.blue:hover {
+    -webkit-box-shadow: 0px 0px 5px 2px rgba(0,174,255,1);
+    -moz-box-shadow: 0px 0px 5px 2px rgba(0,174,255,1);
+    box-shadow: 0px 0px 5px 2px rgba(0,174,255,1);
+}
+
+.image.constrainWidth {
+    width: 100%;
+    height: auto;
+}
+
+.image.constrainHeight {
+    width: auto;
+    height: 4em;
+}
+
+.overlay {
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
 }

@@ -55,6 +55,22 @@ browser.storage.onChanged.addListener((changes, areaName) => {
     if(doReload) Reload();
 });
 
+function Pad(num, width, pad) {
+    pad = pad || '0';
+    num = num + '';
+    return num.length >= width ? num : new Array(width - num.length + 1).join(pad) + num;
+}
+
+/**
+ * @return {string}
+ */
+function FormatDate(date) {
+    let string = "";
+    string += Pad(date.getDate(), 2) + "/";
+    string += Pad(date.getMonth() + 1, 2) + "/";
+    string += date.getFullYear();
+    return string;
+}
 
 function BuildElement(key, data) {
     var ce = ReturnTo.DOM.CreateElement;
@@ -64,7 +80,6 @@ function BuildElement(key, data) {
     ce("img", {src:"../icons/ReturnTo_closeBlack.svg",alt:"Close"}, {}, closeBtn);
 
     closeBtn.addEventListener("click", e => {
-        // ReturnTo.Storage.Remove()
         if(!e) {
             console.log("No event");
             return;
@@ -103,11 +118,14 @@ function BuildElement(key, data) {
         ReturnTo.Storage.Remove(key);
     });
 
-    var p = ce("div", {className:"truncateParent"}, {}, container);
-    ce("p", {className:"truncate", innerHTML:data.targetText}, {}, p);
-    ce("div", {className:"clearfix"}, {}, container);
-    var anchor = ce("div", {className:"returnTo anchor"}, {}, container);
-    var anchorText = ce("span", {innerHTML:data.targetUrl}, {href:data.targetUrl}, anchor);
+    var content = ce("div", {className:"truncateParent"}, {}, container);
+    if(!Builder.Build(content, data))
+        container.classList.add("invalidEntry");
+    ce("div", {className:"clearfix"}, {}, content);
+
+    ce("span", {className:"returnTo timestamp", innerHTML:FormatDate(new Date(data.timeAdded))}, {}, container);
+    const anchor = ce("div", {className: "returnTo anchor"}, {}, container);
+    const anchorText = ce("span", {innerHTML: data.targetUrl}, {href: data.targetUrl}, anchor);
     ce("section", {}, {}, container).style.width = "100%";
 
     anchorText.addEventListener("click", e => {
@@ -118,10 +136,11 @@ function BuildElement(key, data) {
             return;
         }
 
-        browser.tabs.create({
-            active:e.ctrlKey,
-            url:href
-        });
+        ReturnTo.DOM.OpenTab(href, {active:e.ctrlKey});
+        // browser.tabs.create({
+        //     active:e.ctrlKey,
+        //     url:href
+        // });
     });
 
     return container;
@@ -146,11 +165,13 @@ Reload();
 
 function Open(e) {
     var href = "/sidebar/panel.html";
-    browser.tabs.create({
-        active:e.ctrlKey,
-        url:href
-    });
+    ReturnTo.DOM.OpenTab(href, {active:true});
+}
+
+function OpenSettings() {
+    browser.runtime.openOptionsPage();
 }
 
 document.querySelector("#clearBtn").addEventListener("click", ReturnTo.Storage.Clear);
 document.querySelector("#openBtn").addEventListener("click", Open);
+document.querySelector("#settingBtn").addEventListener("click", OpenSettings);
