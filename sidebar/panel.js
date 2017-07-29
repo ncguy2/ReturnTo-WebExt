@@ -8,12 +8,53 @@ const contentBox = document.querySelector("#content");
 //     }
 // });
 
+var panelMap = {};
+var Types = {
+    ADDITION: 1,
+    UNDEFINED: 0,
+    DELETION:-1
+};
+
+/**
+ *
+ * @returns Number from Types
+ */
+function GetType(change) {
+    if(change['oldValue'] && !change['newValue'])
+        return Types.DELETION;
+    if(!change['oldValue'] && change['newValue'])
+        return Types.ADDITION;
+    return Types.UNDEFINED;
+}
+
 browser.storage.onChanged.addListener((changes, areaName) => {
     console.log("Storage change detected in " + areaName);
     console.dir(changes);
 
-    Reload();
+    var doReload = false;
+
+    for(var c in changes) {
+        var key = c;
+        var change = changes[key];
+        switch(GetType(change)) {
+            case Types.ADDITION:
+                AddEntry(key, change.newValue);
+                console.log("Addition detected");
+                break;
+            case Types.DELETION:
+                panelMap[key].remove();
+                panelMap[key] = null;
+                console.log("Deletion detected");
+                break;
+            case Types.UNDEFINED:
+                doReload = true;
+                console.log("Undefined change detected, reloading list...");
+                break;
+        }
+    }
+    if(doReload) Reload();
 });
+
 
 function BuildElement(key, data) {
     var ce = ReturnTo.DOM.CreateElement;
@@ -87,7 +128,9 @@ function BuildElement(key, data) {
 }
 
 function AddEntry(key, data) {
-    document.querySelector("#body").appendChild(BuildElement(key, data));
+    var element = BuildElement(key, data);
+    panelMap[key] = element;
+    document.querySelector("#body").appendChild(element);
 }
 
 function Reload() {
@@ -101,4 +144,13 @@ function Reload() {
 
 Reload();
 
+function Open(e) {
+    var href = "/sidebar/panel.html";
+    browser.tabs.create({
+        active:e.ctrlKey,
+        url:href
+    });
+}
+
 document.querySelector("#clearBtn").addEventListener("click", ReturnTo.Storage.Clear);
+document.querySelector("#openBtn").addEventListener("click", Open);
