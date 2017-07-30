@@ -14,5 +14,9 @@
 	"contextMenuItem.ImageStore": {
 		"message": "Store image",
 		"description": "Stores the focused image for later"
+	},
+	"contextMenuItem.LinkStore": {
+		"message": "Store link",
+		"description": "Stores the focused link for later"
 	}
 }

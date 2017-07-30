@@ -11,6 +11,8 @@ Builder.Build = (container, data) => {
             return Builder.BuildSelection(container, data);
         case ReturnTo.Constants.StorageTypes.Image:
             return Builder.BuildImage(container, data);
+        case ReturnTo.Constants.StorageTypes.Link:
+            return Builder.BuildLink(container, data);
         default:
             return Builder.BuildError(container, data);
     }
@@ -35,8 +37,11 @@ Builder.BuildSelection = (container, data) => {
     return true;
 };
 
+Builder.BuildLink = Builder.BuildPage;
+
 Builder.BuildImage = (container, data) => {
     const ce = ReturnTo.DOM.CreateElement;
+
     const imgDiv = ce("div", {className:"image"}, {}, container);
     const img = ce("img", {className:"image clickable blue"}, {src: data.imageUrl}, imgDiv);
 
@@ -48,6 +53,8 @@ Builder.BuildImage = (container, data) => {
     img.classList.add("constrainHeight");
 
     img.addEventListener("click", e => {
+        e.preventDefault();
+        e.stopPropagation();
         ReturnTo.DOM.OpenTab(data.imageUrl, {active:true});
     });
     return true;

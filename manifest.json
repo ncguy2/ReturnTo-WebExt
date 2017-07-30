@@ -22,6 +22,6 @@
 		"page": "settings/options.html"
 	},
 
-	"permissions": ["storage", "contextMenus", "tabs"]
+	"permissions": ["<all_urls>", "activeTab", "storage", "contextMenus", "tabs"]
 
 }

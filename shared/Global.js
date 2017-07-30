@@ -53,6 +53,7 @@ ReturnTo.Constants = {
         Page: "page",
         Selection: "selection",
         Image: "image",
+        Link: "link",
 
         Audio: "audio",
         Video: "video"
@@ -77,7 +78,7 @@ ReturnTo.DOM = {
 
     OpenTab: function(url, options) {
         options['url'] = url;
-        browser.tabs.create(options);
+        return browser.tabs.create(options);
     },
 
     AddTooltip: function(element, text, position, inverted) {

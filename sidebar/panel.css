@@ -70,10 +70,16 @@ div[data-key]:hover {
 .anchor {
     color: Highlight;
     cursor: pointer;
-
+    float:right;
+    max-width:85%;
 }
 .anchor:hover {
     text-decoration: underline;
+}
+
+.returnTo.icon {
+    float:left;
+    max-width:15%;
 }
 
 .clearfix {
@@ -132,4 +138,8 @@ p {
     left:0;
     width:100%;
     height:100%;
+}
+
+.leftFloat {
+    float: left;
 }
