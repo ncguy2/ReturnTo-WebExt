@@ -1,0 +1,34 @@
+.photonBtn {
+    background: none !important;
+}
+
+.photonBtn:hover {
+    background: var(--hover-colour) !important;
+}
+
+svg.themeable, path.themeable {
+    transition: fill var(--fast-animation);
+}
+
+svg.themeable:not(.dark_theme), path.themeable:not(.dark_theme) {
+    fill: rgba(12, 12, 13, .8);
+}
+
+svg.themeable.dark_theme, path.themeable.dark_theme {
+    fill: rgba(249, 249, 250, .8);
+}
+
+svg.photon {
+    width: 48px;
+    height: 48px;
+}
+
+svg.photon.small {
+    width: 24px;
+    height: 24px;
+}
+
+svg.photon.fit {
+    width: 100%;
+    height: 100%;
+}

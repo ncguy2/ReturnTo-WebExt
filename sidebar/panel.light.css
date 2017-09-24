@@ -1,0 +1,13 @@
+*:not(.dark_theme) {
+    --base-colour: #e2e3e5;
+    --hover-colour: #bfc0c2;
+    --text-colour: black;
+    --section-edge-colour: rgba(195, 195, 195, 0);
+    --section-middle-colour: rgba(195, 195, 195, 1);
+    --block-fade-colour: var(--base-colour);
+    --invalid-entry-colour: hsla(0, 100%, 75%, 0.4);
+
+    --drop-shadow-colour: rgba(19, 19, 20, 0.75);
+    --blue-shadow-colour: rgba(0,174,255,1);
+
+}

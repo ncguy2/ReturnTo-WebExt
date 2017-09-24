@@ -27,13 +27,19 @@ Builder.BuildError = (container, data) => {
 
 Builder.BuildPage = (container, data) => {
     const ce = ReturnTo.DOM.CreateElement;
-    ce("p", {className:"truncate", innerHTML:data.pageTitle}, {}, container);
+    let cls = "themeable";
+    if(ReturnTo.Globals.darkThemeActive)
+        cls += " dark_theme";
+    ce("p", {className:"truncate "+cls, innerHTML:data.pageTitle}, {}, container);
     return true;
 };
 
 Builder.BuildSelection = (container, data) => {
     const ce = ReturnTo.DOM.CreateElement;
-    ce("p", {className:"truncate", innerHTML:data.targetText}, {}, container);
+    let cls = "themeable";
+    if(ReturnTo.Globals.darkThemeActive)
+        cls += " dark_theme";
+    ce("p", {className:"truncate "+cls, innerHTML:data.targetText}, {}, container);
     return true;
 };
 

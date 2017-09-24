@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../shared/Global.js"></script>
+    <script src="panelBuilder.js"></script>
+    <link rel="stylesheet" href="../lib/semantic.min.css">
+    <link rel="stylesheet" href="panel.light.css"/>
+    <link rel="stylesheet" href="panel.dark.css"/>
+    <link rel="stylesheet" href="panel.css"/>
+</head>
+<body id="panelBody" class="themeable">
+    <div id="content" class="themeable returnTo fullWidth">
+        <div class="ui fluid buttons mini themeable">
+            <button class="ui button" id="clearBtn">Clear</button>
+            <!--<button class="ui button hidden" id="openBtn">Open in tab</button>-->
+            <button class="ui button" id="settingBtn">Settings</button>
+            <button class="ui button" id="storageBtn">Storage</button>
+            <button class="ui button" id="toggleBtn">Toggle dark theme</button>
+        </div>
+        <div id="body" class="themeable returnTo fullWidth">
+        </div>
+    </div>
+    <script src="panel.js"></script>
+</body>
+</html>

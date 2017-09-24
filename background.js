@@ -1,13 +1,5 @@
 let listeners = {};
 
-function onCreated() {
-    if(browser.runtime.lastError) {
-        console.log(`Error: ${browser.runtime.lastError}`);
-    }else{
-        console.log("Item created successfully")
-    }
-}
-
 function onRemoved() {
     console.log("Item removed successfully");
 }
@@ -27,11 +19,11 @@ function BuildGenericTarget(type, pageUrl, scrollTop) {
 }
 
 function Add(type, pageUrl, extraData) {
-    ReturnTo.Storage.Add(Prep(type, pageUrl, extraData));
+    ReturnTo.Storage.AddEntry(Prep(type, pageUrl, extraData));
 }
 
 function AddData(data) {
-    ReturnTo.Storage.Add(data);
+    ReturnTo.Storage.AddEntry(data);
 }
 
 function Prep(type, pageUrl, extraData) {

@@ -14,7 +14,8 @@ function BuildCheckbox(id, label, description, form) {
 
     settings.Get(id, value => {
         input.checked = value;
-        l.innerHTML += ", "+JSON.stringify(value);
+        // l.innerHTML += ", "+JSON.stringify(value);
+        // l.insertAdjacentHTML("beforeend", ", "+JSON.stringify(value));
         pendingRequests.splice(pendingRequests.indexOf(id), 1);
     });
 }
@@ -26,6 +27,9 @@ function Load() {
     var registry = ReturnTo.Settings.GetIdealRegistry();
     for(var i in registry) {
         var setting = registry[i];
+
+        if(setting.hidden)
+            continue;
 
         switch(setting.field) {
             case "checkbox":

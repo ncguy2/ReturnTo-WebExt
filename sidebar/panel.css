@@ -1,20 +1,55 @@
+* {
+    --animation-time: .2s;
+    --animation-time-slow: .4s;
+    --animation-curve: cubic-bezier(.07,.95,0,1);
+
+    --fast-animation: var(--animation-time) var(--animation-curve);
+    --slow-animation: var(--animation-time-slow) var(--animation-curve);
+}
+
 body {
     min-width:64px;
+    transition: background var(--fast-animation), color var(--fast-animation);
+    background: var(--base-colour) !important;
+    color: var(--text-colour) !important;
 }
 
 .returnTo.fullWidth {
     width:100%;
 }
 
+.returnTo.fillParent {
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    width:100%;
+    height:100%;
+}
+
+.returnTo.fillParent.subPanel {
+    background: var(--base-colour);
+    transition: left var(--fast-animation), right var(--fast-animation);
+    -webkit-box-shadow: 0px 0px 10px 0px var(--drop-shadow-colour);
+    -moz-box-shadow: 0px 0px 10px 0px var(--drop-shadow-colour);
+    box-shadow: 0px 0px 10px 0px var(--drop-shadow-colour);
+}
+
+.returnTo.fillParent.subPanel:not(.active) {
+    left: calc(100% + 10px);
+    right: calc(-100% - 10px);
+}
+
 div[data-key] {
     padding:2px;
     margin-top:4px;
-    transition: box-shadow .4s, -webkit-box-shadow .4s, -moz-box-shadow .4s;
+    transition: box-shadow var(--slow-animation), -webkit-box-shadow var(--slow-animation), -moz-box-shadow var(--slow-animation);
     position: relative;
 }
 
 section {
-    background: linear-gradient(to right, rgba(195,195,195,0) 0%, rgba(195,195,195,1) 25%, rgba(195,195,195,1) 75%, rgba(195,195,195,0) 100%);
+    background: linear-gradient(to right, var(--section-edge-colour) 0%, var(--section-middle-colour) 25%, var(--section-middle-colour) 75%, var(--section-edge-colour) 100%);
     height: 1px;
     margin-bottom:-2px;
     clear:both;
@@ -22,9 +57,9 @@ section {
 }
 
 div[data-key]:hover {
-    -webkit-box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.75);
-    box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 3px 10px 0px var(--drop-shadow-colour);
+    -moz-box-shadow: 0px 3px 10px 0px var(--drop-shadow-colour);
+    box-shadow: 0px 3px 10px 0px var(--drop-shadow-colour);
 }
 
 .returnTo.anchor, .returnTo.timestamp {
@@ -64,7 +99,7 @@ div[data-key]:hover {
     width: 100%;
     height: 100%;
     /*background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);*/
-    background: linear-gradient(transparent 2.4em, white);
+    background: linear-gradient(transparent 2.4em, var(--block-fade-colour));
 }
 
 .anchor {
@@ -102,24 +137,24 @@ p {
 }
 
 .invalidEntry {
-    background: hsla(0, 100%, 75%, 0.4);
+    background: var(--invalid-entry-colour);
 }
 
 .clickable {
     cursor: pointer;
-    transition: box-shadow .4s, -webkit-box-shadow .4s, -moz-box-shadow .4s;
+    transition: box-shadow var(--slow-animation), -webkit-box-shadow var(--slow-animation), -moz-box-shadow var(--slow-animation);
 }
 
 .clickable.black:hover {
-    -webkit-box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.75);
-    box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 3px 10px 0px var(--drop-shadow-colour);
+    -moz-box-shadow: 0px 3px 10px 0px var(--drop-shadow-colour);
+    box-shadow: 0px 3px 10px 0px var(--drop-shadow-colour);
 }
 
 .clickable.blue:hover {
-    -webkit-box-shadow: 0px 0px 5px 2px rgba(0,174,255,1);
-    -moz-box-shadow: 0px 0px 5px 2px rgba(0,174,255,1);
-    box-shadow: 0px 0px 5px 2px rgba(0,174,255,1);
+    -webkit-box-shadow: 0px 0px 5px 2px var(--blue-shadow-colour);
+    -moz-box-shadow: 0px 0px 5px 2px var(--blue-shadow-colour);
+    box-shadow: 0px 0px 5px 2px var(--blue-shadow-colour);
 }
 
 .image.constrainWidth {
@@ -142,4 +177,12 @@ p {
 
 .leftFloat {
     float: left;
+}
+
+.entryRow {
+
+}
+
+.hidden {
+    display:none;
 }

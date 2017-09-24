@@ -5,15 +5,34 @@
     <script src="../shared/Global.js"></script>
     <script src="panelBuilder.js"></script>
     <link rel="stylesheet" href="../lib/semantic.min.css">
-    <link rel="stylesheet" href="../lib/velocity.min.js">
+    <link rel="stylesheet" href="panel.light.css"/>
+    <link rel="stylesheet" href="panel.dark.css"/>
     <link rel="stylesheet" href="panel.css"/>
+    <link rel="stylesheet" href="../shared/photon.css">
 </head>
-<body id="panelBody">
-    <div id="content" class="returnTo fullWidth">
-        <button class="ui button" id="clearBtn">Clear</button>
-        <button class="ui button" id="openBtn">Open in tab</button>
-        <button class="ui button" id="settingBtn">Settings</button>
-        <div id="body" class="returnTo fullWidth">
+<body id="panelBody" class="themeable">
+    <div id="content" class="themeable returnTo fullWidth">
+        <div class="returnToActions">
+            <button class="ui circular button themeable photonBtn photonMenuBtn" id="OpenSettingSidebar"></button>
+        </div>
+        <div id="body" class="themeable returnTo fullWidth">
+        </div>
+    </div>
+    <div id="settingContent" class="themeable returnTo fillParent subPanel">
+        <div class="sidebarHeader themeable">
+            <button id="sidebar_backBtn" class="ui circular button photonBtn photonBackBtn"></button>
+        </div>
+        <div class="content">
+            <div class="ui fluid vertical buttons">
+                <button class="ui button" id="settingBtn">Addon page</button>
+                <button class="ui button" id="storageBtn">Storage</button>
+                <button class="ui button" id="toggleBtn">Toggle dark theme</button>
+                <button class="ui button" id="importBtn">Import</button>
+            </div>
+            <br>
+            <div class="ui fluid vertical negative buttons">
+                <button class="ui button" id="clearBtn">Clear storage</button>
+            </div>
         </div>
     </div>
     <script src="panel.js"></script>
